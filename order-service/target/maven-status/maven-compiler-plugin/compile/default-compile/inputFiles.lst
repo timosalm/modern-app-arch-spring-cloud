@@ -1,0 +1,12 @@
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/Order.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/OrderServiceApplication.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/CreateOrderData.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/OrderResource.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/OrderStatusUpdate.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/ProductService.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/OrderStatus.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/WebSecurityConfiguration.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/OrderApplicationService.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/ShippingService.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/OrderRepository.java
+/Users/tsalm/Library/CloudStorage/OneDrive-VMware,Inc/Talks/Material/modern-app-architectures-with-spring-cloud/Sourcecode/order-service/src/main/java/com/example/orderservice/order/Product.java

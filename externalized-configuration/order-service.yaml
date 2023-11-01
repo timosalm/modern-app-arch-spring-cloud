@@ -1,0 +1,2 @@
+order.products-api-url: http://product-service.developer-workshops-w01-s006/api/v1/products
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans

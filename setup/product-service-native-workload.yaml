@@ -1,0 +1,23 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+  name: product-service-native
+spec:
+  image: harbor.emea.end2end.link/tap-workshop/product-service-native
+  env:
+    - name: MANAGEMENT_SERVER_PORT
+      value: "8081"
+    - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ADD_ADDITIONAL_PATHS
+      value: "true"
+    - name: MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS
+      value: always
+    - name: MANAGEMENT_ENDPOINTS_WEB_BASE_PATH
+      value: /actuator
+    - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+      value: '*'
+    - name: MANAGEMENT_HEALTH_PROBES_ENABLED
+      value: "true"
+    - name: SERVER_PORT
+      value: "8080"

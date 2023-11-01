@@ -1,0 +1,15 @@
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+spring.cloud.gateway:
+  routes:
+  - id: product-service
+    uri: http://product-service.developer-workshops-w01-s006
+    predicates:
+    - Path=/services/product-service/**
+    filters:
+    - StripPrefix=2
+  - id: order-service
+    uri: http://order-service.developer-workshops-w01-s006
+    predicates:
+    - Path=/services/order-service/**
+    filters:
+    - StripPrefix=2

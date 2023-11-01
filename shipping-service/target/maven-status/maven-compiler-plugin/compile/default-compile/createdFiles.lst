@@ -1,0 +1,5 @@
+com/example/shippingservice/shipping/OrderStatusUpdate.class
+com/example/shippingservice/shipping/ShippingProcessor.class
+com/example/shippingservice/ShippingServiceApplication.class
+com/example/shippingservice/shipping/Order.class
+com/example/shippingservice/shipping/OrderStatus.class

@@ -1,0 +1,2 @@
+shipping.duration: 10000
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans

@@ -1,0 +1,12 @@
+com/example/orderservice/OrderServiceApplication.class
+com/example/orderservice/order/OrderRepository.class
+com/example/orderservice/order/ShippingService.class
+com/example/orderservice/order/ProductService.class
+com/example/orderservice/order/OrderStatusUpdate.class
+com/example/orderservice/WebSecurityConfiguration.class
+com/example/orderservice/order/OrderApplicationService.class
+com/example/orderservice/order/Product.class
+com/example/orderservice/order/OrderStatus.class
+com/example/orderservice/order/CreateOrderData.class
+com/example/orderservice/order/OrderResource.class
+com/example/orderservice/order/Order.class

@@ -1,0 +1,8 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+  name: product-service-jvm
+spec:
+  image: harbor.emea.end2end.link/tap-workshop/product-service
