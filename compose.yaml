@@ -4,7 +4,7 @@ services:
     pull_policy: missing
     container_name: postgres
     ports:
-    - "5432:5432"
+    - "5432"
     environment:
      POSTGRES_PASSWORD: password
   rabbitmq:
@@ -13,31 +13,52 @@ services:
     container_name: rabbitmq
     restart: always
     ports:
-    - "5672:5672"
+    - "5672"
   redis:
     image: "redis/redis-stack-server"
     pull_policy: missing
     container_name: redis
     restart: always
     ports:
-    - "6379:6379"
+    - "6379"
   config-server:
     image: "config-server:1.0.0"
     pull_policy: missing
     container_name: config-server
     ports:
       - "8888"
+    healthcheck:
+      test: [ "CMD", "/workspace/health-check" ]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
     depends_on:
-      - service-registry
-      - zipkin
+      service-registry:
+        condition: service_healthy
+      zipkin:
+        condition: service_started
+    environment:
+      THC_PATH: "/actuator/health"
+      THC_PORT: 8888
   service-registry:
     image: "service-registry:1.0.0"
     pull_policy: missing
     container_name: service-registry
     ports:
       - "8761"
+    healthcheck:
+      test: [ "CMD", "/workspace/health-check" ]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    environment:
+      THC_PATH: "/actuator/health"
+      THC_PORT: 8761
     depends_on:
-      - zipkin
+      zipkin:
+        condition: service_started
   zipkin:
     image: "openzipkin/zipkin"
     container_name: zipkin
@@ -50,11 +71,12 @@ services:
      ports:
        - "8080"
      depends_on:
-       - service-registry
-       - config-server
-       - order-service
-       - product-service
-       - zipkin
+       service-registry:
+         condition: service_healthy
+       config-server:
+         condition: service_healthy
+       zipkin:
+         condition: service_started
   order-service:
     image: "order-service:1.0.0"
     pull_policy: missing
@@ -62,13 +84,18 @@ services:
     ports:
       - "8080"
     depends_on:
-      - service-registry
-      - config-server
-      - product-service
-      - rabbitmq
-      - redis
-      - postgres
-      - zipkin
+      service-registry:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+      redis:
+        condition: service_started
+      postgres:
+        condition: service_started
+      zipkin:
+        condition: service_started
   product-service:
     image: "product-service:1.0.0"
     pull_policy: missing
@@ -76,9 +103,13 @@ services:
     ports:
       - "8080"
     depends_on:
-      - service-registry
-      - config-server
-      - zipkin
+      service-registry:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      zipkin:
+        condition: service_healthy
+
   #shipping-service:
   #  image: "gateway"
   #  ports:

@@ -1,6 +1,6 @@
 spring:
   application.name: shipping-service # for config server
-  config.import: "optional:configserver:http://config-server:8888"
+  config.import: "configserver:http://config-server:8888"
   cloud.stream.bindings:
       shipOrder-in-0.destination: ${shipping.in-exchange}
       shipOrder-out-0.destination: ${shipping.out-exchange}

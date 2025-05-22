@@ -1,4 +1,4 @@
-package com.example.orderservice;
+/*package com.example.orderservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,3 +24,4 @@ class WebSecurityConfiguration {
 			    ).build();
     }
 }
+*/

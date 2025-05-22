@@ -30,7 +30,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <image />
+                    <image>
+                        <env>
+                            <BP_HEALTH_CHECKER_ENABLED>true</BP_HEALTH_CHECKER_ENABLED>
+                        </env>
+                        <buildpacks>
+                            <buildpack>urn:cnb:builder:paketo-buildpacks/java</buildpack>
+                            <buildpack>paketobuildpacks/health-checker:latest</buildpack>
+                        </buildpacks>
+                    </image>
                     <pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 </configuration>
             </plugin>

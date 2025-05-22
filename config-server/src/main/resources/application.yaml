@@ -7,7 +7,7 @@ spring:
     # Helps to identify a misconfigured configuration source quickly
     clone-on-start: true
 server.port: 8888
-eureka.client.serviceUrl.defaultZone: http://service-registry/eureka/
+eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
 management:
   tracing.sampling.probability: 1
-  zipkin.tracing.endpoint: http://zipkin/api/v2/spans
+  zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans

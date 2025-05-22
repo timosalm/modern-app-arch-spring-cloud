@@ -1,4 +1,4 @@
 spring:
   application.name: gateway
-  config.import: "optional:configserver:http://config-server:8888"
+  config.import: "configserver:http://config-server:8888"
 management.tracing.sampling.probability: 1
