@@ -1,2 +1,0 @@
-spring.cloud.config.enabled: false
-product-service.product-names: VMware Tanzu Application Platform

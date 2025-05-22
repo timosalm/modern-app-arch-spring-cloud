@@ -1,2 +1,6 @@
-order.products-api-url: http://product-service.developer-workshops-w01-s006/api/v1/products
-management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+order.products-api-url: http://product-service/api/v1/products
+
+spring:
+  security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
+eureka.client.serviceUrl.defaultZone: http://service-registry/eureka/
+management.zipkin.tracing.endpoint: http://zipkin/api/v2/spans

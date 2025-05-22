@@ -1,8 +1,0 @@
-product-service.product-names: VMware Tanzu Application Platform
-spring:
-  config.import: "optional:configserver:http://config-server"
-  application.name: product-service
-  security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
-management:
-  tracing.sampling.probability: 1.0
-  zipkin.tracing.endpoint: 'http://zipkin:9411/api/v2/spans'
