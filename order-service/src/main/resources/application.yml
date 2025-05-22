@@ -2,9 +2,7 @@ spring:
   application.name: order-service # for config server
   jpa.hibernate.ddl-auto: update
   config.import: "optional:configserver:http://config-server"
-  security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
- management:
-  zipkin.tracing.endpoint:
+management.tracing.sampling.probability: 1
 
 order:
   exchange-name: order-delivered-exchange

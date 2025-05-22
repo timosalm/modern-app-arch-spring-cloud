@@ -1,1 +1,10 @@
-spring.application.name=service-registry
+spring.application.name: service-registry
+server.port: 8761
+eureka:
+  instance.preferIpAddress: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+management:
+  tracing.sampling.probability: 1
+  zipkin.tracing.endpoint: http://zipkin/api/v2/spans

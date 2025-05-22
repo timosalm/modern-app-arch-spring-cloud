@@ -8,11 +8,33 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <modules>
         <module>product-service</module>
         <module>order-service</module>
-        <module>shipping-service</module>
+        <!--<module>shipping-service</module>-->
         <module>gateway</module>
+        <module>config-server</module>
+        <module>service-registry</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image />
+                    <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

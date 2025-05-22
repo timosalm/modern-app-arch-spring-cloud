@@ -1,11 +1,12 @@
 spring:
   application.name: order-service # for config server
   jpa.hibernate.ddl-auto: update
-  config.import: "optional:configserver:http://config-server"
+  config.import: "optional:configserver:http://config-server:8888"
   security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
- management:
-  zipkin.tracing.endpoint:
-
+management:
+  tracing.sampling.probability: 1
+  zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange

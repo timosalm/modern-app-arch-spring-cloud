@@ -1,1 +1,13 @@
-spring.cloud.config.server.git.clone-on-start: true
+spring:
+  application.name: config-server
+  cloud.config.server.git:
+    uri: https://github.com/timosalm/modern-app-arch-spring-cloud
+    search-paths:
+    - externalized-configuration
+    # Helps to identify a misconfigured configuration source quickly
+    clone-on-start: true
+server.port: 8888
+eureka.client.serviceUrl.defaultZone: http://service-registry/eureka/
+management:
+  tracing.sampling.probability: 1
+  zipkin.tracing.endpoint: http://zipkin/api/v2/spans

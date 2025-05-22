@@ -1,2 +1,4 @@
 server.port: 8888
-spring.cloud.config.server.git.uri: ssh://localhost/config-repo
+spring.cloud:
+  discovery.enabled: false
+  config.server.git.uri: ssh://localhost/config-repo

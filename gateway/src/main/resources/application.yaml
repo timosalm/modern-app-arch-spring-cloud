@@ -1,4 +1,4 @@
 spring:
-  security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
   application.name: gateway
   config.import: "optional:configserver:http://config-server"
+management.tracing.sampling.probability: 1

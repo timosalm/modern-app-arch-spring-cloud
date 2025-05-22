@@ -12,16 +12,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 class WebSecurityConfiguration {
 
-    @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        return http
-                .authorizeExchange(authorize -> authorize
-                        .pathMatchers("/services/**").authenticated()
-                        .pathMatchers("/**").permitAll()
-                )
-                .oauth2ResourceServer((resourceServer) -> resourceServer
-				          .jwt(withDefaults())
-			          )
-                .build();
-    }
+	@Bean
+	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+		return http
+				.authorizeExchange(authorize -> authorize
+						.pathMatchers("/services/**").authenticated()
+						.pathMatchers("/**").permitAll()
+				)
+				.oauth2ResourceServer((resourceServer) -> resourceServer
+						.jwt(withDefaults())
+				)
+				.build();
+	}
 }

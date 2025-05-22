@@ -1,0 +1,85 @@
+services:
+  postgres:
+    image: "postgres"
+    pull_policy: missing
+    container_name: postgres
+    ports:
+    - "5432:5432"
+    environment:
+     POSTGRES_PASSWORD: password
+  rabbitmq:
+    image: "rabbitmq"
+    pull_policy: missing
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "5672:5672"
+  redis:
+    image: "redis/redis-stack-server"
+    pull_policy: missing
+    container_name: redis
+    restart: always
+    ports:
+    - "6379:6379"
+  config-server:
+    image: "config-server:1.0.0"
+    pull_policy: missing
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - service-registry
+      - zipkin
+  service-registry:
+    image: "service-registry:1.0.0"
+    pull_policy: missing
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    depends_on:
+      - zipkin
+  zipkin:
+    image: "openzipkin/zipkin"
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+  gateway:
+     image: "gateway:1.0.0"
+     pull_policy: missing
+     container_name: gateway
+     ports:
+       - "8080"
+     depends_on:
+       - service-registry
+       - config-server
+       - order-service
+       - product-service
+       - zipkin
+  order-service:
+    image: "order-service:1.0.0"
+    pull_policy: missing
+    container_name: order-service
+    ports:
+      - "8080"
+    depends_on:
+      - service-registry
+      - config-server
+      - product-service
+      - rabbitmq
+      - redis
+      - postgres
+      - zipkin
+  product-service:
+    image: "product-service:1.0.0"
+    pull_policy: missing
+    container_name: product-service
+    ports:
+      - "8080"
+    depends_on:
+      - service-registry
+      - config-server
+      - zipkin
+  #shipping-service:
+  #  image: "gateway"
+  #  ports:
+  #    - "8080"
