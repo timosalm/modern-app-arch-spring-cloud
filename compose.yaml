@@ -26,7 +26,7 @@ services:
     pull_policy: missing
     container_name: config-server
     ports:
-      - "8888:8888"
+      - "8888"
     depends_on:
       - service-registry
       - zipkin
@@ -35,14 +35,14 @@ services:
     pull_policy: missing
     container_name: service-registry
     ports:
-      - "8761:8761"
+      - "8761"
     depends_on:
       - zipkin
   zipkin:
     image: "openzipkin/zipkin"
     container_name: zipkin
     ports:
-      - "9411:9411"
+      - "9411"
   gateway:
      image: "gateway:1.0.0"
      pull_policy: missing
