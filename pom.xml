@@ -18,7 +18,7 @@
     <modules>
         <module>product-service</module>
         <module>order-service</module>
-        <!--<module>shipping-service</module>-->
+        <module>shipping-service</module>
         <module>gateway</module>
         <module>config-server</module>
         <module>service-registry</module>

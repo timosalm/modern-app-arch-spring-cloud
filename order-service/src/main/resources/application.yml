@@ -3,7 +3,8 @@ spring:
   jpa.hibernate.ddl-auto: update
   config.import: "configserver:http://config-server:8888"
 management.tracing.sampling.probability: 1
-
+logging.level:
+    org.springframework.cloud.loadbalancer: DEBUG
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange

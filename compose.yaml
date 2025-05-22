@@ -108,9 +108,20 @@ services:
       config-server:
         condition: service_healthy
       zipkin:
-        condition: service_healthy
+        condition: service_started
 
-  #shipping-service:
-  #  image: "gateway"
-  #  ports:
-  #    - "8080"
+  shipping-service:
+    image: "shipping-service:1.0.0"
+    pull_policy: missing
+    container_name: shipping-service
+    ports:
+    - "8080"
+    depends_on:
+      service-registry:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      zipkin:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
