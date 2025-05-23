@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.cache.annotation.Cacheable;
@@ -35,14 +36,12 @@ class ProductService {
     public List<Product> fetchProducts() {
         if (productsApiUrl == null || productsApiUrl.isEmpty()) {
             throw new RuntimeException("order.products-api-url not set");
-        }/*
+        }
         return circuitBreakerFactory.create("products").run(() ->
             Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(productsApiUrl, Product[].class))),
         throwable -> {
             log.error("Call to product service failed, using empty product list as fallback", throwable);
             return Collections.emptyList();
         });
-        */
-        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(productsApiUrl, Product[].class)));
     }
 }
