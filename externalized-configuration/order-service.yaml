@@ -11,4 +11,6 @@ spring:
 eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
 management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
 logging.level:
-    org.springframework.cache: TRACE
+    org.springframework:
+      cache: TRACE
+      cloud.loadbalancer: INFO
