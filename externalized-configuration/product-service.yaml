@@ -1,6 +1,6 @@
 product-service.product-names: Tanzu Spring, Spring Application Advisor, Tanzu Build Service
 
 spring:
-  security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server/oauth2/jwks
+  security.oauth2.resourceserver.jwt.jwk-set-uri: http://172.17.0.1:9000/oauth2/jwks
 eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
 management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans

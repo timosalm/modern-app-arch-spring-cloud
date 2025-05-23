@@ -17,13 +17,12 @@ class WebSecurityConfiguration {
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 		return http
 				.authorizeExchange(authorize -> authorize
-						//.pathMatchers("/services/**").authenticated()
+						.pathMatchers("/services/**").authenticated()
 						.pathMatchers("/**").permitAll()
 				).csrf(ServerHttpSecurity.CsrfSpec::disable)
-				/*
 				.oauth2ResourceServer((resourceServer) -> resourceServer
 						.jwt(withDefaults())
-				)*/
+				)
 				.build();
 	}
 }
