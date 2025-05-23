@@ -1,4 +1,4 @@
-order.products-api-url: http://product-service/api/v1/products
+order.products-api-url: http://PRODUCT-SERVICE/api/v1/products
 
 spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: http://host.docker.internal:9000/oauth2/jwks
