@@ -43,6 +43,5 @@ class ProductService {
             log.error("Call to product service failed, using empty product list as fallback", throwable);
             return Collections.emptyList();
         });
-
     }
 }
