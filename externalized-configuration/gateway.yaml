@@ -3,13 +3,13 @@ spring:
     discovery.locator.enabled: true
     routes:
       - id: product-service
-        uri: lb://PRODUCT-SERVICE
+        uri: lb://product-service
         predicates:
           - Path=/services/product-service/**
         filters:
           - StripPrefix=2
       - id: order-service
-        uri: lb://ORDER-SERVICE
+        uri: lb://order-service
         predicates:
           - Path=/services/order-service/**
         filters:
