@@ -1,14 +1,17 @@
 spring:
   cloud.gateway:
+    discovery.locator:
+      enabled: true
+      lower-case-service-id: true
     routes:
       - id: product-service
-        uri: http://product-service:8080
+        uri: lb://product-service:8080
         predicates:
           - Path=/services/product-service/**
         filters:
           - StripPrefix=2
       - id: order-service
-        uri: http://order-service:8080
+        uri: lb://order-service:8080
         predicates:
           - Path=/services/order-service/**
         filters:
