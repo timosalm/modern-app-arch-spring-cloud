@@ -1,11 +1,11 @@
 package com.example.shippingservice.shipping;
 
-class OrderStatusUpdate {
+public class OrderStatusUpdate {
 
     private Long id;
     private OrderStatus status;
 
-    private OrderStatusUpdate() {
+    public OrderStatusUpdate() {
     }
 
     private OrderStatusUpdate(Long id, OrderStatus status) {

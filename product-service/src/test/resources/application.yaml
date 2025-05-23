@@ -1,3 +1,4 @@
 spring.cloud:
   config.enabled: false
   discovery.enabled: false
+product-service.product-names: Spring Application Advisor

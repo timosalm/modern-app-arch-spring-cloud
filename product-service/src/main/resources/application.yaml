@@ -1,6 +1,6 @@
 spring:
   application.name: product-service
-  config.import: "configserver:http://config-server:8888"
+  config.import: "optional:configserver:http://config-server:8888"
 management:
   tracing.sampling.probability: 1.0
   endpoints.web.exposure.include: refresh

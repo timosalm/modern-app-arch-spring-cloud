@@ -14,7 +14,7 @@ import java.util.function.Function;
 @Component
 public class ShippingProcessor {
 
-    private static final Logger log = LoggerFactory.getLogger(ShippingServiceApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(ShippingProcessor.class);
 
     @Value("${shipping.duration}")
     private int shippingDuration;

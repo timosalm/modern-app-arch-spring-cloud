@@ -22,7 +22,7 @@ public class Order implements Serializable { // Serializable required for Redis 
 
     private String shippingAddress;
 
-    private Order() {
+    public Order() {
     }
 
     private Order(Long productId, String shippingAddress) {
