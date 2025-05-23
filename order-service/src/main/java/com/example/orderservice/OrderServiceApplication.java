@@ -40,19 +40,18 @@ public class OrderServiceApplication {
                         return execution.execute(request, body);
                     }
 
-                    if (!(authentication.getCredentials() instanceof AbstractOAuth2Token)) {
+                    if (!(authentication.getCredentials() instanceof AbstractOAuth2Token token)) {
                         return execution.execute(request, body);
                     }
 
-                    AbstractOAuth2Token token = (AbstractOAuth2Token) authentication.getCredentials();
-                    request.getHeaders().setBearerAuth(token.getTokenValue());
+					request.getHeaders().setBearerAuth(token.getTokenValue());
                     return execution.execute(request, body);
                 }).build();
     }
 
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> groupExecutorServiceCustomizer() {
-        return factory -> factory.configureGroupExecutorService(group -> new DelegatingSecurityContextExecutorService(Executors.newVirtualThreadPerTaskExecutor()));
+        return factory -> factory.configureGroupExecutorService(group -> new DelegatingSecurityContextExecutorService(Executors.newCachedThreadPool()));
     }
 
     @Bean

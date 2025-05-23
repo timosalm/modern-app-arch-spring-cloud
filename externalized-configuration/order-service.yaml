@@ -8,6 +8,5 @@ spring:
     username: postgres
     password: password
   rabbitmq.host: rabbitmq
-  threads.virtual.enabled: true
 eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
 management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
