@@ -1,4 +1,4 @@
-product-service.product-names: Tanzu Spring, Spring Application Advisor, Tanzu Build Service, Tanzu Application Catalog
+product-service.product-names: Tanzu Spring, Spring Application Advisor, Tanzu Build Service
 
 spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: http://host.docker.internal:9000/oauth2/jwks
