@@ -59,6 +59,24 @@ services:
     depends_on:
       zipkin:
         condition: service_started
+  auth-server:
+    image: "auth-server:1.0.0"
+    pull_policy: missing
+    container_name: auth-server
+    ports:
+      - "9000"
+    healthcheck:
+      test: [ "CMD", "/workspace/health-check" ]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    environment:
+      THC_PATH: "/actuator/health"
+      THC_PORT: 8761
+    depends_on:
+      zipkin:
+        condition: service_started
   zipkin:
     image: "openzipkin/zipkin"
     container_name: zipkin
