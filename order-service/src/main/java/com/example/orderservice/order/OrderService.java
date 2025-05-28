@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderApplicationService {
+public class OrderService {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderApplicationService.class);
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
     private final ProductService productService;
     private final ShippingService shippingService;
 
-    OrderApplicationService(OrderRepository orderRepository, ProductService productService,
-                            ShippingService shippingService) {
+    OrderService(OrderRepository orderRepository, ProductService productService,
+                 ShippingService shippingService) {
         this.orderRepository = orderRepository;
         this.productService = productService;
         this.shippingService = shippingService;

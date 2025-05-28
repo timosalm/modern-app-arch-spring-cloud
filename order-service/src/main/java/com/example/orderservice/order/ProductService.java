@@ -33,7 +33,7 @@ class ProductService {
         this.restTemplate = restTemplate;
     }
 
-    @Cacheable(value = "Products", unless = "#result.length() > 0")
+    @Cacheable(value = "Products", unless = "#result.size() > 0")
     @CircuitBreaker(maxAttempts = 1)
     public List<Product> fetchProducts() {
         if (productsApiUrl == null || productsApiUrl.isEmpty()) {

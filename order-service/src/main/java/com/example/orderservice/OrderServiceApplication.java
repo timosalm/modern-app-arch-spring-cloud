@@ -9,19 +9,12 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.AbstractOAuth2Token;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cache.annotation.EnableCaching;
-
-import java.util.concurrent.Executors;
 
 @EnableCaching
 @SpringBootApplication
@@ -43,13 +36,6 @@ public class OrderServiceApplication {
                     return execution.execute(request, body);
                 }).build();
     }
-
-    /*
-    @Bean
-    public Customizer<Resilience4JCircuitBreakerFactory> groupExecutorServiceCustomizer() {
-        return factory -> factory.configureGroupExecutorService(group -> new DelegatingSecurityContextExecutorService(Executors.newCachedThreadPool()));
-    }
-     */
 
     @Bean
     public MessageConverter messageConverter() {

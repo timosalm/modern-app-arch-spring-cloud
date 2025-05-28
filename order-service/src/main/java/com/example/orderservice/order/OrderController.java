@@ -9,25 +9,25 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(OrderResource.BASE_URI)
-class OrderResource {
+@RequestMapping(OrderController.BASE_URI)
+class OrderController {
 
     static final String BASE_URI = "/api/v1/orders";
 
-    private final OrderApplicationService orderApplicationService;
+    private final OrderService orderService;
 
-    OrderResource(OrderApplicationService orderApplicationService) {
-        this.orderApplicationService = orderApplicationService;
+    OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GetMapping
     public ResponseEntity<List<Order>> fetchOrders() {
-        return ResponseEntity.ok(orderApplicationService.fetchOrders());
+        return ResponseEntity.ok(orderService.fetchOrders());
     }
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@NotNull @Valid @RequestBody CreateOrderData createOrderData) {
-        final Order order = orderApplicationService.createOrder(createOrderData);
+        final Order order = orderService.createOrder(createOrderData);
         final URI orderUri = URI.create(String.format("%s/%s", BASE_URI, order.getId()));
         return ResponseEntity.created(orderUri).body(order);
     }
