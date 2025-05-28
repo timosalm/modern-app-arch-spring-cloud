@@ -10,7 +10,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2024.0.1</spring-cloud.version>
+        <spring-cloud.version>2025.0.0-RC1</spring-cloud.version>
     </properties>
 
     <parent>
@@ -40,7 +40,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<!--
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
@@ -56,10 +66,9 @@
                             <buildpack>paketobuildpacks/health-checker:latest</buildpack>
                         </buildpacks>
                     </image>
-                    <pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 </project>

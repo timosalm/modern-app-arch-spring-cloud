@@ -7,11 +7,14 @@
 ## Deployment
 
 ### Docker Compose
+
+Build container images with [Cloud Native Buildpacks](https://buildpacks.io/) and start containers.
 ```
 ./mvnw spring-boot:build-image
 docker compose up
 ```
 
+Set environment variables in different terminal session for API usage.
 ```
 GATEWAY_URL="http://0.0.0.0:$(docker compose port gateway 8080 | awk -F ':' '{print $2}')"
 ACCESS_TOKEN=$(curl --location 'http://localhost:9000/oauth2/token' \
@@ -20,6 +23,8 @@ ACCESS_TOKEN=$(curl --location 'http://localhost:9000/oauth2/token' \
 --data-urlencode 'grant_type=client_credentials' \
 --data-urlencode 'scope=openid profile' | jq -r .access_token)
 ```
+
+To stop the containers, press CTRL+C to interrupt the process and run `docker compose down`.
 
 ## API usage
 - Fetch products:

@@ -5,9 +5,7 @@ spring:
       shipOrder-in-0.destination: ${shipping.in-exchange}
       shipOrder-out-0.destination: ${shipping.out-exchange}
 
-management:
-  tracing.sampling.probability: 1
-  endpoints.web.exposure.include: refresh
+management.endpoints.web.exposure.include: refresh
 
 shipping:
   in-exchange: order-shipping-exchange

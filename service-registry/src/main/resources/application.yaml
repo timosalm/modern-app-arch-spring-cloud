@@ -5,6 +5,7 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+
 management:
   tracing.sampling.probability: 1
   zipkin.tracing.endpoint: http://zipkin/api/v2/spans

@@ -14,7 +14,11 @@ spring:
           - Path=/services/order-service/**
         filters:
           - StripPrefix=2
+
   security.oauth2.resourceserver.jwt.jwk-set-uri: http://host.docker.internal:9000/oauth2/jwks
+
 eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
-management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+management:
+  zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+  tracing.sampling.probability: 1
 

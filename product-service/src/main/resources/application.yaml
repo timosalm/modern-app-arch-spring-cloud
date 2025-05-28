@@ -1,9 +1,8 @@
 spring:
   application.name: product-service
   config.import: "optional:configserver:http://config-server:8888"
-management:
-  tracing.sampling.probability: 1.0
-  endpoints.web.exposure.include: refresh
+
+management.endpoints.web.exposure.include: refresh
 
 product-service.product-names: Spring Application Advisor
 
