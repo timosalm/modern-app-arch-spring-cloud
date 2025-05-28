@@ -75,6 +75,10 @@ services:
       THC_PATH: "/actuator/health"
       THC_PORT: 8761
     depends_on:
+      service-registry:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
       zipkin:
         condition: service_started
   zipkin:
