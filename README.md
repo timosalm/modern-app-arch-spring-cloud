@@ -1,4 +1,4 @@
-# Demo for a typical Spring Cloud Architecture
+# Demo for a typical Modern App Architecture with Spring Cloud
 
 ![](docs/architecture.png)
 
