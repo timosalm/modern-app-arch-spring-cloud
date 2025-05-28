@@ -17,7 +17,7 @@ docker compose up
 Set environment variables in different terminal session for API usage.
 ```
 GATEWAY_URL="http://0.0.0.0:$(docker compose port gateway 8080 | awk -F ':' '{print $2}')"
-ACCESS_TOKEN=$(curl --location 'http://localhost:9000/oauth2/token' \
+ACCESS_TOKEN=$(curl --location "http://0.0.0.0:$(docker compose port auth-server 9000 | awk -F ':' '{print $2}')/oauth2/token" \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header "Authorization: Basic $(echo -n "default-client-id:default-client-secret" | base64)" \
 --data-urlencode 'grant_type=client_credentials' \

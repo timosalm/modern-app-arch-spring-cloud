@@ -1,0 +1,23 @@
+spring.security.oauth2:
+  authorizationserver:
+    client:
+      default-client:
+        registration:
+          client-id: default-client-id
+          client-secret: "{noop}default-client-secret"
+          client-authentication-methods:
+            - client_secret_basic
+          authorization-grant-types:
+            - client_credentials
+          scopes:
+            - openid
+            - profile
+        require-authorization-consent: false
+server.port: 9000
+
+logging.level.org.springframework.security: trace
+
+eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka/
+management:
+  zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+  tracing.sampling.probability: 1
