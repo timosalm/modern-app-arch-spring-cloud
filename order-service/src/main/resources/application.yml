@@ -3,7 +3,7 @@ spring:
   jpa.hibernate.ddl-auto: update
   config.import: "configserver:http://config-server:8888"
 
-management.endpoints.web.exposure.include: refresh
+management.endpoints.web.exposure.include: refresh, cache
 
 order:
   exchange-name: order-delivered-exchange

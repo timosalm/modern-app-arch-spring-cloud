@@ -9,14 +9,15 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.AbstractOAuth2Token;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cache.annotation.EnableCaching;
 
@@ -34,24 +35,21 @@ public class OrderServiceApplication {
     RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.additionalInterceptors(
                 (request, body, execution) -> {
-                    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                    if (authentication == null) {
-                        return execution.execute(request, body);
-                    }
 
-                    if (!(authentication.getCredentials() instanceof AbstractOAuth2Token token)) {
-                        return execution.execute(request, body);
+                    var auth = SecurityContextHolder.getContext().getAuthentication();
+                    if (auth instanceof JwtAuthenticationToken jwt) {
+                        request.getHeaders().setBearerAuth(jwt.getToken().getTokenValue());
                     }
-
-					request.getHeaders().setBearerAuth(token.getTokenValue());
                     return execution.execute(request, body);
                 }).build();
     }
 
+    /*
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> groupExecutorServiceCustomizer() {
         return factory -> factory.configureGroupExecutorService(group -> new DelegatingSecurityContextExecutorService(Executors.newCachedThreadPool()));
     }
+     */
 
     @Bean
     public MessageConverter messageConverter() {

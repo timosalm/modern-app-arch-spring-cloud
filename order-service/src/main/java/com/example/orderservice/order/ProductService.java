@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.retry.annotation.CircuitBreaker;
+import org.springframework.retry.annotation.Recover;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 
@@ -32,16 +33,19 @@ class ProductService {
         this.restTemplate = restTemplate;
     }
 
-    @Cacheable("Products")
+    @Cacheable(value = "Products", unless = "#result.length() > 0")
+    @CircuitBreaker(maxAttempts = 1)
     public List<Product> fetchProducts() {
         if (productsApiUrl == null || productsApiUrl.isEmpty()) {
             throw new RuntimeException("order.products-api-url not set");
         }
-        return circuitBreakerFactory.create("products").run(() ->
-            Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(productsApiUrl, Product[].class))),
-        throwable -> {
-            log.error("Call to product service failed, using empty product list as fallback", throwable);
-            return Collections.emptyList();
-        });
+        return Arrays.asList(restTemplate.getForObject(productsApiUrl, Product[].class));
     }
+
+    @Recover
+    List<Product> fetchProductsFallback(Throwable exception) {
+        log.error("Call to product service failed, using empty product list as fallback", exception);
+        return Collections.emptyList();
+    }
+
 }

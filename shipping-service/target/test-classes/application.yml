@@ -1,7 +1,0 @@
-spring.cloud:
-  config.enabled: false
-  discovery.enabled: false
-# Use W3C format for OpenTelemetry
-management.tracing.propagation.type: w3c
-shipping:
-  duration: 0

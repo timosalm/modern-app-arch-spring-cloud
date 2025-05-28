@@ -45,3 +45,7 @@ To stop the containers, press CTRL+C to interrupt the process and run `docker co
   ```
   curl -XPOST $GATEWAY_URL/services/product-service/actuator/refresh --header "Authorization: Bearer $ACCESS_TOKEN"
   ```
+- Call custom actuator endpoint to clear caches
+  ```
+  curl -XPOST "$GATEWAY_URL/services/order-service/actuator/cache" --header "Authorization: Bearer $ACCESS_TOKEN"
+  ```

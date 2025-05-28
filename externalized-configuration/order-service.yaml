@@ -1,4 +1,4 @@
-order.products-api-url: http://PRODUCT-SERVICE/api/v1/products
+
 
 spring:
   security.oauth2.resourceserver.jwt.jwk-set-uri: http://auth-server:9000/oauth2/jwks
