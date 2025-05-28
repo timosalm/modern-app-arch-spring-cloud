@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 
 @RefreshScope
 @Service
@@ -26,15 +25,12 @@ class ProductService {
     @Value("${order.products-api-url}")
     private String productsApiUrl;
 
-    private final CircuitBreakerFactory circuitBreakerFactory;
-    ProductService(RestTemplate restTemplate, CircuitBreakerFactory circuitBreakerFactory) {
-        this.circuitBreakerFactory = circuitBreakerFactory;
-
+    ProductService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Cacheable(value = "Products", unless = "#result.size() > 0")
-    @CircuitBreaker(maxAttempts = 1)
+    @CircuitBreaker(maxAttempts = 1, recover = "fetchProductsFallback")
     public List<Product> fetchProducts() {
         if (productsApiUrl == null || productsApiUrl.isEmpty()) {
             throw new RuntimeException("order.products-api-url not set");
