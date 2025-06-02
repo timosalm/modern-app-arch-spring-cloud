@@ -1,5 +1,5 @@
 spring:
-  cloud.gateway:
+  cloud.gateway.server.webflux:
     discovery.locator.enabled: true
     routes:
       - id: product-service
