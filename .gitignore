@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 .DS_STORE
 private/
-
+.advisor/
 ### STS ###
 .apt_generated
 .classpath
