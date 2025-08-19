@@ -1,8 +1,0 @@
-spring:
-  application.name: product-service
-  config.import: "optional:configserver:http://config-server:8888"
-
-management.endpoints.web.exposure.include: refresh
-
-product-service.product-names: Spring Application Advisor
-

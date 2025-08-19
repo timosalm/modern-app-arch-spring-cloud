@@ -9,10 +9,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cache.annotation.EnableCaching;
 
@@ -23,18 +20,9 @@ public class OrderServiceApplication {
     private static final Logger log = LoggerFactory.getLogger(OrderServiceApplication.class);
 
 
-    @LoadBalanced
     @Bean
     RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder.additionalInterceptors(
-                (request, body, execution) -> {
-
-                    var auth = SecurityContextHolder.getContext().getAuthentication();
-                    if (auth instanceof JwtAuthenticationToken jwt) {
-                        request.getHeaders().setBearerAuth(jwt.getToken().getTokenValue());
-                    }
-                    return execution.execute(request, body);
-                }).build();
+        return restTemplateBuilder.build();
     }
 
     @Bean
@@ -44,9 +32,7 @@ public class OrderServiceApplication {
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        var rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setObservationEnabled(true);
-        return rabbitTemplate;
+        return new RabbitTemplate(connectionFactory);
     }
 
     public static void main(String[] args) {

@@ -2,12 +2,8 @@ package com.example.orderservice.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.io.Serializable;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Product implements Serializable { // Serializable required for Redis cache
-
-    private static final long serialVersionUID = 2364007368011758242L;
+class Product {
 
     private Long id;
 
