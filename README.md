@@ -4,48 +4,37 @@
 
 [Presentation slides](docs/slides.pdf)
 
-## Deployment
+## Prerequisites
+- A Tanzu Platform 10.2 environment
+- [Spring Application Advisor installed](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-application-advisor/1-4/spring-app-advisor/run-app-advisor-cli.html)
 
-### Docker Compose
+## Demo
 
-Build container images with [Cloud Native Buildpacks](https://buildpacks.io/) and start containers.
+### Get CVEs
+Go to Tanzu Hub, select the Repositories menu.
+Click Manage Connections, and Attach Spring App Advisor menu.
+Fill out the form and copy/paste the printed environment variables into your terminal.
 ```
-./mvnw spring-boot:build-image
-docker compose up
-```
-
-Set environment variables in different terminal session for API usage.
-```
-GATEWAY_URL="http://0.0.0.0:$(docker compose port gateway 8080 | awk -F ':' '{print $2}')"
-ACCESS_TOKEN=$(curl --location "http://0.0.0.0:$(docker compose port auth-server 9000 | awk -F ':' '{print $2}')/oauth2/token" \
---header 'Content-Type: application/x-www-form-urlencoded' \
---header "Authorization: Basic $(echo -n "default-client-id:default-client-secret" | base64)" \
---data-urlencode 'grant_type=client_credentials' \
---data-urlencode 'scope=openid profile' | jq -r .access_token)
+advisor build-config get && advisor build-config publish
 ```
 
-To stop the containers, press CTRL+C to interrupt the process and run `docker compose down`.
+Create CF manifest and initial push
+```
+./mvnw clean package
 
-## API usage
-- Fetch products:
-  ```
-  curl $GATEWAY_URL/services/product-service/api/v1/products --header "Authorization: Bearer $ACCESS_TOKEN"
-  ```
-- Fetch orders:
-  ```
-  curl $GATEWAY_URL/services/order-service/api/v1/orders --header "Authorization: Bearer $ACCESS_TOKEN"
-  ```
-- Create order (After 10 seconds the status of the order should be DELIVERED)
-  ```
-  curl -XPOST "$GATEWAY_URL/services/order-service/api/v1/orders" --header "Authorization: Bearer $ACCESS_TOKEN" --header "Content-Type: application/json" --data '{"productId":1,"shippingAddress":"Stuttgart"}'
-  ```
-- Update externalized application configuration
-  Fork the repository and adjust the `spring.cloud.config.server.git.uri` configuration in [config-server/src/main/resources/application.yaml](config-server/src/main/resources/application.yaml).
-  Change the `product-service.product-names` configuration property in [externalized-configuration/product-service.yaml](externalized-configuration/product-service.yaml) and run the following command to refresh the bean with the new configuration.
-  ```
-  curl -XPOST $GATEWAY_URL/services/product-service/actuator/refresh --header "Authorization: Bearer $ACCESS_TOKEN"
-  ```
-- Call custom actuator endpoint to clear caches
-  ```
-  curl -XPOST "$GATEWAY_URL/services/order-service/actuator/cache" --header "Authorization: Bearer $ACCESS_TOKEN"
-  ```
+advisor advice list
+advisor advice apply --name=tanzu
+
+cf push -f .tanzu/order-service/manifest.yml
+```
+
+Create backing services
+```
+cf marketplace
+cf create-service postgres small db
+cf create-service p.rabbitmq rmq-single-node rabbit
+
+cf bind-service order-service db
+cf bind-service order-service rabbit
+cf restage order-service
+```
