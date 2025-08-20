@@ -2,6 +2,8 @@ spring:
   application.name: order-service
   jpa.hibernate.ddl-auto: update
 
+management.endpoints.web.exposure.include: refresh, cache
+
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange

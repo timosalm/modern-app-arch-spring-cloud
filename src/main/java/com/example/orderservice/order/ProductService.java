@@ -3,6 +3,7 @@ package com.example.orderservice.order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.retry.annotation.CircuitBreaker;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.cache.annotation.Cacheable;
 
 @Service
 class ProductService {
@@ -25,6 +27,8 @@ class ProductService {
         this.restTemplate = restTemplate;
     }
 
+    @Cacheable(value = "Products", unless = "#result.size() > 0")
+    @CircuitBreaker(maxAttempts = 1)
     public List<Product> fetchProducts() {
         if (productsApiUrl == null || productsApiUrl.isEmpty()) {
             throw new RuntimeException("order.products-api-url not set");

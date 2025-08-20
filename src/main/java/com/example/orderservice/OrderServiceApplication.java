@@ -19,7 +19,6 @@ public class OrderServiceApplication {
 
     private static final Logger log = LoggerFactory.getLogger(OrderServiceApplication.class);
 
-
     @Bean
     RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.build();

@@ -1,4 +1,6 @@
-spring.datasource.url: jdbc:h2:mem:testdb
+spring:
+  datasource.url: jdbc:h2:mem:testdb
+  data.redis.repositories.enabled: false
 
 order:
   exchange-name: order-delivered-exchange
