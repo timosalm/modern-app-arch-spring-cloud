@@ -5,14 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.ValidationException;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "`Order`") // Order is a reserved word
-public class Order implements Serializable { // Serializable required for Redis cache
-
-    private static final long serialVersionUID = -1122620860862785845L;
+public class Order {
 
     @Id
     @GeneratedValue
