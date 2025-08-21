@@ -33,5 +33,15 @@ cf bind-service product-service service-registry configserver
 cf restage product-service
 ```
 
+### Scaling
+```
+cf scale product-service -i 2
+
+advisor build-config get
+advisor upgrade-plan list
+
+```
+
+
 
 
