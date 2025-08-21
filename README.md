@@ -12,17 +12,15 @@
 
 Checkout and follow previous steps [here](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/1_tanzu-platform-sb-2-7)
 
-### Add caching
+### Add caching and circuit breaking
 ```
 cf marketplace
 cf create-service p.redis vk-plan cache
 cf bind-service order-service cache
-cf push
-```
 
-### Add Spring Cloud Services
-```
-cf create-service p.service-registry standard service-registry
-cf bind-service order-service service-registry
+cf create-route --hostname product-service
+
+./mvnw clean package
+cf push
 ```
 

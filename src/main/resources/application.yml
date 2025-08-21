@@ -10,4 +10,4 @@ logging.level.org.springframework:
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange
-  products-api-url: http://product-service/api/v1/products
+  products-api-url: https://httpbin.org/status/503

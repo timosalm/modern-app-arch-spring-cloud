@@ -1,6 +1,6 @@
 applications:
  - name: order-service
-   path: ../../target/order-service-1.0.0.jar
+   path: target/order-service-1.0.0.jar
    buildpacks:
     - java_buildpack_offline
    env:
