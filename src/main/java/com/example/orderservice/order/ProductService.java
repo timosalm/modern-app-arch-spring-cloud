@@ -37,7 +37,7 @@ class ProductService {
     }
 
     List<Product> fetchProductsFallback(Throwable exception) {
-        log.error("Call to product service failed, using empty product list as fallback", exception);
+        log.error("Call to product service failed, using empty product list as fallback");
         return Collections.emptyList();
     }
 

@@ -1,10 +1,12 @@
 package com.example.orderservice.order;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.ValidationException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,8 +37,11 @@ public class Order implements Serializable { // Serializable required for Redis 
     }
 
     void validate(List<Product> products) {
+        if (products == null || products.isEmpty()) {
+            throw new ValidationNotPossibleException();
+        }
         if (products.stream().noneMatch(product -> product.getId().equals(productId))) {
-            throw new ValidationException("Unable to validate product");
+            throw new ValidationException();
         }
     }
 
@@ -83,4 +88,10 @@ public class Order implements Serializable { // Serializable required for Redis 
         return "Order{id=" + id + ", productId=" + productId + ", orderStatus=" + orderStatus + ", shippingAddress='" +
                 shippingAddress + '\'' + '}';
     }
+
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Unable to validate product")
+    public static class ValidationNotPossibleException extends RuntimeException { }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "The order contains invalid products")
+    public static class ValidationException extends RuntimeException { }
 }
