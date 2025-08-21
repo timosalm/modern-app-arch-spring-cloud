@@ -1,7 +1,9 @@
 spring:
   datasource.url: jdbc:h2:mem:testdb
   data.redis.repositories.enabled: false
-
+  cloud:
+    config.enabled: false
+    discovery.enabled: false
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange

@@ -1,6 +1,7 @@
 spring:
   application.name: order-service
   jpa.hibernate.ddl-auto: update
+  config.import: "configserver:http://config-server:8888"
 
 management.endpoints.web.exposure.include: health, info, refresh, cache, caches, metrics
 logging.level.org.springframework:
@@ -12,4 +13,4 @@ server.error.include-message: always
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange
-  products-api-url: https://httpbin.org/status/503
+  products-api-url: //product-service/api/v1/products

@@ -10,15 +10,18 @@
 
 ## Demo
 
-Checkout and follow previous steps [here](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/1_tanzu-platform-sb-2-7)
+Checkout and follow previous steps: [part 1](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/1_tanzu-platform-sb-2-7), [part2](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/2_tanzu-platform-services-resiliency)
 
-### Add caching and circuit breaking
+### Add Spring Cloud Services
 ```
 cf marketplace
-cf create-service p.redis vk-plan cache
-cf bind-service order-service cache
+cf create-service p.service-registry standard service-registry
+cf create-service p.gateway standard gateway
+cf create-service  p.config-server standard configserver
 
-cf create-route --hostname product-service
+cf bind-service order-service service-registry
+cf bind-service order-service service-registry gateway
+cf bind-service order-service service-registry configserver
 
 ./mvnw clean package
 cf push
