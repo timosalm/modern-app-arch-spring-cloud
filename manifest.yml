@@ -1,0 +1,10 @@
+applications:
+ - name: order-service
+   path: ../../target/order-service-1.0.0.jar
+   buildpacks:
+    - java_buildpack_offline
+   env:
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 1.8.+ } }'
+    SPRING_PROFILES_ACTIVE: 'default'
+
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

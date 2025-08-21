@@ -2,9 +2,12 @@ spring:
   application.name: order-service
   jpa.hibernate.ddl-auto: update
 
-management.endpoints.web.exposure.include: refresh, cache
-
+management.endpoints.web.exposure.include: health, info, refresh, cache, caches, metrics
+logging.level.org.springframework:
+  cache: TRACE
+  retry: TRACE
+  cloud.circuitbreaker: TRACE
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange
-  products-api-url:
+  products-api-url: http://product-service/api/v1/products
