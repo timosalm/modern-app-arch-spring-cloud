@@ -7,6 +7,8 @@ logging.level.org.springframework:
   cache: TRACE
   retry: TRACE
   cloud.circuitbreaker: TRACE
+server.error.include-message: always
+
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange
