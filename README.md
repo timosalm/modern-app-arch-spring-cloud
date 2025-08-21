@@ -25,5 +25,13 @@ cf bind-service order-service service-registry configserver
 
 ./mvnw clean package
 cf push
+
+(cd product-service && ./mvnw clean package && cf push)
+cf bind-service product-service service-registry
+cf bind-service product-service service-registry gateway -c '{"routes": [{"path": "/product-service/**"}]}'
+cf bind-service product-service service-registry configserver
+cf restage product-service
 ```
+
+
 

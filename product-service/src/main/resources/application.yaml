@@ -1,0 +1,8 @@
+spring:
+  application.name: product-service
+  config.import: "optional:configserver:http://config-server:8888"
+
+management.endpoints.web.exposure.include: health, info, refresh, metrics
+
+product-service.product-names: Tanzu Platform
+
