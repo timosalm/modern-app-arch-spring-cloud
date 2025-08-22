@@ -20,8 +20,8 @@ cf create-service p.gateway standard gateway
 cf create-service -c '{ "git": { "uri": "https://github.com/timosalm/modern-app-arch-spring-cloud", "label": "3_tanzu-platform-sc-services", "searchPaths": "{externalized-configuration}" }}' p.config-server standard configserver
 
 cf bind-service order-service service-registry
-cf bind-service order-service service-registry gateway -c '{"routes": [{"path": "/order-service/**"}]}'
-cf bind-service order-service service-registry configserver
+cf bind-service order-service gateway -c '{"routes": [{"path": "/order-service/**"}]}'
+cf bind-service order-service configserver
 
 ./mvnw clean package
 cf push

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
-    private static final Logger log = LoggerFactory.getLogger(ProductApplicationService.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
 
     @Value("${product-service.product-names}")
     private List<String> productNames;

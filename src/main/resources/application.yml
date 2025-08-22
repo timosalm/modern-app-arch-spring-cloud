@@ -1,7 +1,6 @@
 spring:
   application.name: order-service
   jpa.hibernate.ddl-auto: update
-  config.import: "configserver:http://config-server:8888"
 
 management.endpoints.web.exposure.include: health, info, refresh, cache, caches, metrics
 logging.level.org.springframework:
