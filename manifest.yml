@@ -4,6 +4,6 @@ applications:
    buildpacks:
     - java_buildpack_offline
    env:
-    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 1.8.+ } }'
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'
     SPRING_PROFILES_ACTIVE: 'cloud'
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
