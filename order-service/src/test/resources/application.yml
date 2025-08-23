@@ -4,6 +4,7 @@ spring:
   cloud:
     config.enabled: false
     discovery.enabled: false
+  ai.openai.api-key: invalid
 order:
   exchange-name: order-delivered-exchange
   shipping-exchange-name: order-shipping-exchange

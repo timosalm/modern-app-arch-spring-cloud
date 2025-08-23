@@ -1,7 +1,6 @@
 package com.example.orderservice;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -18,8 +17,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 public class OrderServiceApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(OrderServiceApplication.class);
-
     @LoadBalanced
     @Bean
     RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
@@ -33,7 +30,14 @@ public class OrderServiceApplication {
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        return new RabbitTemplate(connectionFactory);
+        var rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(messageConverter());
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public ChatClient chatClient(ChatClient.Builder chatClientBuilder) {
+        return chatClientBuilder.build();
     }
 
     public static void main(String[] args) {

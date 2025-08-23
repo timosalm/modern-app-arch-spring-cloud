@@ -25,11 +25,11 @@ public class OrderService {
         shippingService.setOrderStatusUpdateConsumer(this::updateOrderStatus);
     }
 
-    List<Order> fetchOrders() {
+    public List<Order> fetchOrders() {
         return orderRepository.findAll();
     }
 
-    Order createOrder(CreateOrderData createOrderData) {
+    public Order createOrder(CreateOrderData createOrderData) {
         final Order order = Order.create(createOrderData.getProductId(), createOrderData.getShippingAddress());
 
         final List<Product> products = productService.fetchProducts();

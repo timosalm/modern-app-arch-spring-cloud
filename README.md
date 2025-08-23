@@ -12,34 +12,23 @@
 
 Checkout and follow previous steps: [part 1](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/1_tanzu-platform-sb-2-7), [part2](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/2_tanzu-platform-services-resiliency)
 
-### Add Spring Cloud Services
+### Add Shipping Service
 ```
-cf marketplace
-cf create-service p.service-registry standard service-registry
-cf create-service p.gateway standard gateway
-cf create-service -c '{ "git": { "uri": "https://github.com/timosalm/modern-app-arch-spring-cloud", "label": "3_tanzu-platform-sc-services", "searchPaths": "externalized-configuration" }}' p.config-server standard configserver
-
-cf bind-service order-service service-registry
-cf bind-service order-service gateway -c '{"routes": [{"path": "/order-service/**"}]}'
-cf bind-service order-service configserver
-
-./mvnw clean package
-cf push
-
-(cd product-service && ./mvnw clean package && cf push)
-cf bind-service product-service service-registry
-cf bind-service product-service gateway -c '{"routes": [{"path": "/product-service/**"}]}'
-cf bind-service product-service configserver
-cf restage product-service
+(cd shipping-service && ./mvnw clean package)
+(cd shipping-service && cf push)
+cf bind-service shipping-service rabbit
+cf bind-service shipping-service configserver
+cf bind-service shipping-service service-registry
+cf restage shipping-service
 ```
 
-### Scaling
+### Add GenAi
 ```
-cf scale product-service -i 2
+cf create-service genai gemma2:2b aimodel
+cf bind-service order-service aimodel
 
-advisor build-config get
-advisor upgrade-plan list
-
+(cd order-service && ./mvnw clean package)
+(cd order-service && cf push)
 ```
 
 

@@ -1,0 +1,16 @@
+spring:
+  application.name: shipping-service # for config server
+  cloud.stream.bindings:
+      shipOrder-in-0:
+        destination: ${shipping.in-exchange}
+        contentType: application/json
+      shipOrder-out-0:
+        destination: ${shipping.out-exchange}
+        contentType: application/json
+
+management.endpoints.web.exposure.include: health, info, refresh, metrics
+
+shipping:
+  in-exchange: order-shipping-exchange
+  out-exchange: order-delivered-exchange
+  duration: 1000

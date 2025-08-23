@@ -1,0 +1,9 @@
+applications:
+ - name: shipping-service
+   path: target/shipping-service-1.0.0.jar
+   buildpacks:
+    - java_buildpack_offline
+   env:
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'
+    SPRING_PROFILES_ACTIVE: 'cloud'
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'

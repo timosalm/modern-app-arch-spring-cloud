@@ -1,6 +1,20 @@
 spring:
   application.name: order-service
   jpa.hibernate.ddl-auto: update
+  ai:
+    model:
+      chat: openai
+      embedding: none
+      image: none
+      audio:
+        speech: none
+        transcription: none
+      moderation: none
+    openai:
+      chat:
+        options:
+          temperature: 0.0
+      api-key:
 
 management.endpoints.web.exposure.include: health, info, refresh, cache, caches, metrics
 logging.level.org.springframework:
