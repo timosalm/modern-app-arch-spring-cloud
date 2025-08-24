@@ -7,10 +7,15 @@
 ## Prerequisites
 - A Tanzu Platform 10.2 environment
 - [Spring Application Advisor installed](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-application-advisor/1-4/spring-app-advisor/run-app-advisor-cli.html)
-
+- For demo script: [Demo Magic](https://github.com/paxtonhare/demo-magic)
 ## Demo
 
 Checkout and follow previous steps: [part 1](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/1_tanzu-platform-sb-2-7), [part2](https://github.com/timosalm/modern-app-arch-spring-cloud/tree/2_tanzu-platform-services-resiliency)
+
+Instead of running the commands manually, you can run them via a demo script.
+```
+./demo.sh
+```
 
 ### Add Spring Cloud Services
 ```
@@ -38,8 +43,8 @@ cf restage product-service
 cf scale product-service -i 2
 
 advisor build-config get
-advisor upgrade-plan list
-
+advisor upgrade-plan get
+advisor upgrade-plan apply --squash
 ```
 
 
