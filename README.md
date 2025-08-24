@@ -31,7 +31,7 @@ cf bind-service order-service configserver
 ./mvnw clean package
 cf push
 
-(cd product-service && ./mvnw clean package && cf push)
+(cd product-service && ./mvnw clean package && cf push --no-start)
 cf bind-service product-service service-registry
 cf bind-service product-service gateway -c '{"routes": [{"path": "/product-service/**"}]}'
 cf bind-service product-service configserver
@@ -41,7 +41,6 @@ cf restage product-service
 ### Scaling
 ```
 cf scale product-service -i 2
-
 
 export GATEWAY_URL=$(cf service gateway | grep "dashboard url:" | sed -E 's/.*https:\/\/([^/]+).*/\1/')
 curl https://$GATEWAY_URL/order-service/actuator/metrics/application.started.time
