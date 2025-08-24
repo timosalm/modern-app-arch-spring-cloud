@@ -53,4 +53,4 @@ clear
 pe "advisor upgrade-plan get"
 wait
 clear
-pe "advisor upgrade-plan apply --squash"
+pe "advisor upgrade-plan apply --squash 9"
