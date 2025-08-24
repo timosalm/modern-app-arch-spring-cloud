@@ -3,8 +3,13 @@
 ## Prerequisites
 - A Tanzu Platform 10.2 environment
 - [Spring Application Advisor installed](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-application-advisor/1-4/spring-app-advisor/run-app-advisor-cli.html)
-
+- For demo script: [Demo Magic](https://github.com/paxtonhare/demo-magic)
 ## Demo
+
+Instead of running the commands manually, you can run them via a demo script.
+```
+./demo.sh
+```
 
 ### Get CVEs
 Go to Tanzu Hub, select the Repositories menu.
