@@ -25,13 +25,13 @@ pei "./mvnw clean package"
 pei "cf push"
 wait
 clear
-pei "(cd product-service && cf push --no-push)"
+pei "(cd product-service && cf push --no-start)"
 wait
 clear
 pei "cf bind-service product-service service-registry"
 pei "cf bind-service product-service gateway -c '{\"routes\": [{\"path\": \"/product-service/**\"}]}'"
 pei "cf bind-service product-service configserver"
-pei "(cd product-service && ./mvnw clean package && cf push)"
+pei "(cd product-service && cf restage product-service)"
 wait
 clear
 export GATEWAY_URL=$(cf service gateway | grep "dashboard url:" | sed -E 's/.*https:\/\/([^/]+).*/\1/')
