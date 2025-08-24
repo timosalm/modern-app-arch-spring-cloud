@@ -44,13 +44,32 @@ clear
 p "Scaling product service"
 wait
 clear
-pe "cf scale product-service -i 2"
+pei "cf scale product-service -i 2"
 wait
 clear
-pe "advisor build-config get"
+
+export GATEWAY_URL=$(cf service gateway | grep "dashboard url:" | sed -E 's/.*https:\/\/([^/]+).*/\1/')
+pei "curl https://$GATEWAY_URL/order-service/actuator/metrics/application.started.time"
 wait
 clear
-pe "advisor upgrade-plan get"
+pei "curl https://$GATEWAY_URL/order-service/actuator/metrics/jvm.memory.used"
 wait
 clear
-pe "advisor upgrade-plan apply --squash 9"
+
+pei "advisor build-config get"
+wait
+clear
+pei "advisor upgrade-plan get"
+wait
+clear
+pei "advisor upgrade-plan apply --squash 9"
+wait
+clear
+pei "./mvnw clean package"
+pei "cf push"
+wait
+clear
+pei "curl https://$GATEWAY_URL/order-service/actuator/metrics/application.started.time"
+wait
+clear
+pei "curl https://$GATEWAY_URL/order-service/actuator/metrics/jvm.memory.used"

@@ -42,9 +42,18 @@ cf restage product-service
 ```
 cf scale product-service -i 2
 
+
+export GATEWAY_URL=$(cf service gateway | grep "dashboard url:" | sed -E 's/.*https:\/\/([^/]+).*/\1/')
+curl https://$GATEWAY_URL/order-service/actuator/metrics/application.started.time
+curl https://$GATEWAY_URL/order-service/actuator/metrics/jvm.memory.used
+
 advisor build-config get
 advisor upgrade-plan get
-advisor upgrade-plan apply --squash
+advisor upgrade-plan apply --squash 9
+
+./mvnw clean package && cf push
+curl https://$GATEWAY_URL/order-service/actuator/metrics/application.started.time
+curl https://$GATEWAY_URL/order-service/actuator/metrics/jvm.memory.used
 ```
 
 
